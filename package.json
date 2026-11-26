@@ -1,0 +1,56 @@
+{
+  "name": "python-docstring-helper",
+  "displayName": "Python Docstring Helper",
+  "description": "Создаёт и обновляет docstring функций Python на основе анализа кода",
+  "version": "1.0.0",
+  "publisher": "student",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": ["Programming Languages"],
+  "main": "./src/extension.js",
+  "activationEvents": ["onLanguage:python"],
+  "contributes": {
+    "commands": [
+      {
+        "command": "docstringGenerator.generate",
+        "title": "Docstring: документировать функцию под курсором"
+      },
+      {
+        "command": "docstringGenerator.generateAll",
+        "title": "Docstring: документировать все функции файла"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "docstringGenerator.generate",
+        "key": "ctrl+alt+d",
+        "mac": "cmd+alt+shift+d",
+        "when": "editorTextFocus && editorLangId == python"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "docstringGenerator.generate",
+          "when": "editorLangId == python",
+          "group": "1_modification"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Python Docstring Helper",
+      "properties": {
+        "docstringGenerator.placeholder": {
+          "type": "string",
+          "default": "TODO",
+          "description": "Текст-заполнитель для описаний, которые нужно дописать"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "node --test test/docstring.test.js"
+  },
+  "license": "MIT"
+}
